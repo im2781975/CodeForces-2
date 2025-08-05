@@ -1,3 +1,56 @@
+#include <iostream>
+#include <vector>
+#include <string>
+#include <algorithm>
+https://codeforces.com/problemset/problem/7/A
+// A. Kalevitch and Chess
+using namespace std;
+int main() {
+    vector<bool> row(8, false), col(8, false);
+    string line;
+    for (int r = 0; r < 8; ++r) {
+        cin >> line;
+        for (int c = 0; c < 8; ++c) {
+            if (line[c] == 'W') {
+                row[r] = true;
+                col[c] = true;
+            }
+        }
+    }
+    int blockedRows = count(row.begin(), row.end(), true);
+    int blockedCols = count(col.begin(), col.end(), true);
+    int answer = 16 - blockedRows - blockedCols;
+    // If all rows and columns are unblocked, output should be 8
+    if (answer == 16) {
+        answer = 8;
+    }
+    cout << answer << endl;
+    return 0;
+}
+using namespace std;
+int main(){
+    string s;
+    bool row[8] = {false}, col[8] = {false};
+    for (int r = 0; r < 8; ++r)
+    {
+        cin >> s;
+        for (int c = 0; c < 9; ++c)
+        {
+            if (s[c] == 'W')
+            {
+                row[r] = true;
+                col[c] = true;
+            }
+        }
+    }
+    int answer = 16 - count(row, row + 8, true) - count(col, col + 8, true);
+    if (answer == 16)
+    {
+        answer = 8;
+    }
+    cout << answer;
+    return 0;
+}
 using namespace std;
 // A. IQ test
 // problemset/problem/25/A
@@ -585,6 +638,140 @@ int main(){
     if (next == m)    cout << "YES\n";
     else    cout << "NO\n";
 }
+#include <iostream>
+
+using namespace std;
+
+bool isprime(int n)
+{
+    for (int i = 2; i * i <= n; ++i)
+    {
+        if (n % i == 0)
+        {
+            return false;
+        }
+    }
+    return true;
+}
+
+int main()
+{
+    int n, m;
+    cin >> n >> m;
+
+    int next = n + 1;
+    while (!isprime(next))
+    {
+        next += 1;
+    }
+
+    cout << (next == m ? "YES" : "NO") << endl;
+
+    return 0;
+}
+https://codeforces.com/problemset/problem/81/A
+// A. Plug-in
+using namespace std;
+int main() {
+    string input; cin >> input;
+    string result;
+    for (char c : input) {
+        result.push_back(c);
+        int len = result.length();
+        // If the last two characters are the same, remove them
+        if (len >= 2 && result[len - 1] == result[len - 2]) {
+            result.pop_back();
+            result.pop_back();
+        }
+    }
+    cout << result << endl;
+    return 0;
+}
+
+https://codeforces.com/problemset/problem/82/A
+// A. Double Cola
+using namespace std;
+int main(){
+    int n; cin >> n;
+    int r = 1;
+    while (r * 5 < n){
+        n -= r * 5;
+        r *= 2;
+    }
+    string names[] = {"Sheldon", "Leonard", "Penny", "Rajesh", "Howard"};
+    cout << names[(n - 1) / r] << endl;
+}
+https://codeforces.com/problemset/problem/84/A
+// A. Toy Army
+using namespace std;
+int main(){
+    int n; cin >> n;
+    cout << n + n / 2 << endl;
+    return 0;
+}
+https://codeforces.com/problemset/problem/92/A
+// A. Chips
+using namespace std;
+int main(){
+    int n, m;
+    cin >> n >> m;
+    m %= (n * (n + 1) / 2);
+    for (int i = 1; i <= n; ++i){
+        if (m < i)    break;
+        m -= i;
+    }
+    cout << m << endl;
+    return 0;
+}
+using namespace std;
+int main() {
+    int n, m; cin >> n >> m;
+    m %= (n * (n + 1) / 2);
+    for (int i = 1; i <= n; ++i) {
+        if (m < i) break;
+        m -= i;
+    }
+    cout << m << endl;
+    return 0;
+}
+
+https://codeforces.com/problemset/problem/94/A
+// A. Restoring Password
+using namespace std;
+int main() {
+    string s; cin >> s;
+    string digit[10];
+    for (int i = 0; i < 10; ++i)
+        cin >> digit[i];
+    for (int i = 0; i < 8; ++i) {
+        string chunk = s.substr(i * 10, 10);
+        for (int j = 0; j < 10; ++j) {
+            if (chunk == digit[j]) {
+                cout << j;
+                break;
+            }
+        }
+    }
+    cout << endl;
+}
+using namespace std;
+int main(){
+    string s, digit[10];
+    cin >> s;
+    for (size_t i = 0; i < sizeof(digit) / sizeof(digit[0]); ++i)
+        cin >> digit[i];
+    for (size_t i = 0; i < 8; ++i){
+        string x = s.substr(i * 10, 10);
+        for (size_t j = 0; j < 10; ++j){
+            if (x == digit[j]){
+                cout << j;
+                break;
+            }
+        }
+    }
+    cout << endl;
+}
+
 http://codeforces.com/problemset/problem/96/A
 // A. Football
 using namespace std;
@@ -616,6 +803,72 @@ int main() {
         else    count = 1;
     }
     cout << (danger ? "YES" : "NO") << endl;
+}
+https://codeforces.com/problemset/problem/96/A
+// A. Football
+using namespace std;
+int main(){
+    string s; cin >> s;
+    int contiguous = 1;
+    for (size_t i = 1; i < s.length(); ++i){
+        if (s[i] == s[i - 1]){
+            contiguous += 1;
+            if (contiguous == 7){
+                cout << "YES" << endl;
+                return 0;
+            }
+        }
+        else    contiguous = 1;
+    }
+    cout << "NO" << endl;
+}
+using namespace std;
+int main() {
+    string s; cin >> s;
+    int count = 1;
+    for (size_t i = 1; i < s.length(); ++i) {
+        if (s[i] == s[i - 1]) {
+            ++count;
+            if (count == 7) {
+                cout << "YES" << endl;
+                return 0;
+            }
+        } else
+            count = 1;
+    }
+    cout << "NO" << endl;
+}
+#include <iostream>
+#include <string>
+https://codeforces.com/contest/99/problem/A
+// A. Help Far Away Kingdom
+using namespace std;
+int main(){
+    string s; cin >> s;
+    size_t n = s.find('.');
+    if (s[n-1] == '9'){
+        cout << "GOTO Vasilisa." << endl;
+    }
+    else{
+        if (s[n+1] >= '5') {
+            s[n-1] += 1;
+        }
+        s.erase(s.begin() + n, s.end());
+        cout << s << endl;
+    }
+}
+using namespace std;
+int main() {
+    string s; cin >> s;
+    size_t dotPos = s.find('.');
+    if (s[dotPos - 1] == '9')
+        cout << "GOTO Vasilisa." << endl;
+    else {
+        if (s[dotPos + 1] >= '5')
+            s[dotPos - 1] += 1;
+        s.erase(dotPos);
+        cout << s << endl;
+    }
 }
 
 using namespace std;
