@@ -1,23 +1,6 @@
 
 
-#include        pa[i].second = y;
-    }
-    sort(pa, pa + m, comp);
-    int got = n;
-    int len = m;
-    for (int i = 0; i < len && got > 0; i++) {
-        int first = pa[i].first;
-        int second = pa[i].second;
-        if (first <= got) {
-            sum += (unsigned long long)first * second;
-            got -= first;
-        } else {
-            sum += (unsigned long long)got * second;
-            got = 0;
-        }
-    }
-    cout << sum << endl;
-}
+
 
 using namespace std;
 // A. IQ test
