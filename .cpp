@@ -1,7 +1,3 @@
-
-
-
-
 using namespace std;
 // A. IQ test
 // problemset/problem/25/A
