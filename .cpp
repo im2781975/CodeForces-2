@@ -419,6 +419,34 @@ int main(){
     }
     cout << s2;
 }
+https://codeforces.com/problemset/problem/63/A
+// A. Sinking Ship
+using namespace std;
+int main() {
+    int n; cin >> n;
+    vector<string> rats, womenAndChildren, men, captain;
+    string name, status;
+    for (int i = 0; i < n; ++i) {
+        cin >> name >> status;
+        if (status == "rat")
+            rats.push_back(name);
+        else if (status == "woman" || status == "child")
+            womenAndChildren.push_back(name);
+        else if (status == "man")
+            men.push_back(name);
+        else if (status == "captain")
+            captain.push_back(name);
+    }
+    for (const auto& person : rats)
+        cout << person << endl;
+    for (const auto& person : womenAndChildren)
+        cout << person << endl;
+    for (const auto& person : men)
+        cout << person << endl;
+    for (const auto& person : captain)
+        cout << person << endl;
+    return 0;
+}
 using namespace std;
 http://codeforces.com/contest/66/problem/B
 // 66B - Petya and Countryside
@@ -489,6 +517,80 @@ int main(){
 	    }
     }
     cout << resultvalue << endl;
+}
+https://codeforces.com/problemset/problem/66/B
+// B. Petya and Countryside
+using namespace std;
+int main()
+{
+    int n, height[1000], left[1000] = {0}, right[1000] = {0};
+    cin >> n;
+    for (int i = 0; i < n; ++i)    cin >> height[i];
+    for (int i = 1; i < n; ++i)
+        left[i] = (height[i] >= height[i-1] ? left[i-1] + 1 : 0);
+    for (int i = n - 2; i >= 0; --i)
+        right[i] = (height[i] >= height[i+1] ? right[i+1] + 1 : 0);
+    int maximal;
+    for (int i = 0; i < n; ++i)
+    {
+        if (left[i] + right[i] + 1 > maximal)
+            maximal = left[i] + right[i] + 1;
+    }
+    cout << maximal;
+    return 0;
+}
+using namespace std;
+
+int main() {
+    int n;
+    cin >> n;
+    vector<int> height(n), left(n, 0), right(n, 0);
+    for (int i = 0; i < n; ++i) {
+        cin >> height[i];
+    }
+    // Calculate how far left we can go from each point
+    for (int i = 1; i < n; ++i) {
+        if (height[i] >= height[i - 1]) {
+            left[i] = left[i - 1] + 1;
+        }
+    }
+    // Calculate how far right we can go from each point
+    for (int i = n - 2; i >= 0; --i) {
+        if (height[i] >= height[i + 1]) {
+            right[i] = right[i + 1] + 1;
+        }
+    }
+    // Find the maximum total length
+    int maxLength = 0;
+    for (int i = 0; i < n; ++i) {
+        maxLength = max(maxLength, left[i] + right[i] + 1);
+    }
+    cout << maxLength << endl;
+    return 0;
+}
+
+ https://codeforces.com/problemset/problem/68/A
+// A. Irrational problem
+using namespace std;
+int main() {
+    int p[4], a, b;
+    for (int i = 0; i < 4; ++i)
+        cin >> p[i];
+    cin >> a >> b;
+    int minValue = *min_element(p, p + 4);
+    if (a < minValue) {
+        int upper = min(b, minValue - 1);
+        cout << upper - a + 1 << endl;
+    } else
+        cout << 0 << endl;
+}
+using namespace std;
+int main(){
+    int p[4], a, b;
+    cin >> p[0] >> p[1] >> p[2] >> p[3] >> a >> b;
+    int m = *min_element(p, p + 4);
+    if (a < m)    cout << min(b, m - 1) - a + 1 << endl;
+    else    cout << 0;
 }
 using namespace std;
 http://codeforces.com/contest/69/problem/A
@@ -4643,6 +4745,145 @@ int main(){
     reverse(s2.begin(), s2.end());
     cout << s + s2;
 }
+https://codeforces.com/problemset/problem/689/A
+// A. Mike and Cellphone
+using namespace std;
+char s[10];
+bool up = 0, down = 0, left = 0, right = 0;
+unsigned n;
+int main(){
+    char s[10];
+    int n; cin >> n >> s;
+	for(int i=0;i<n;++i){
+		switch(s[i]-'0'){
+			case 0:down=1;left=1;right=1;break;
+			case 1:left=1;up=1;break;
+			case 2:up=1;break;
+			case 3:right=1;up=1;break;
+			case 4:left=1;break;
+			case 6:right=1;break;
+			case 7:left=1;down=1;break;
+			case 9:right=1;down=1;
+		}
+	}
+    if(up && down && left && right)
+		printf("YES\n");
+	else
+		printf("NO\n");
+	return 0;
+}
+using namespace std;
+
+int main() {
+    unsigned int n;
+    string s;
+    cin >> n >> s;
+
+    bool up = false, down = false, left = false, right = false;
+
+    for (char ch : s) {
+        switch (ch) {
+            case '0':
+                down = left = right = true;
+                break;
+            case '1':
+                left = up = true;
+                break;
+            case '2':
+                up = true;
+                break;
+            case '3':
+                right = up = true;
+                break;
+            case '4':
+                left = true;
+                break;
+            case '6':
+                right = true;
+                break;
+            case '7':
+                left = down = true;
+                break;
+            case '9':
+                right = down = true;
+                break;
+            // '5' and '8' are in the middle, no effect on direction
+        }
+    }
+    if (up && down && left && right)
+        cout << "YES" << endl;
+    else
+        cout << "NO" << endl;
+}
+https://codeforces.com/problemset/problem/689/B
+// B. Mike and Shortcuts.cpp
+#define maxn 200010
+using namespace std;
+int way[maxn];
+unsigned a[maxn];
+queue<unsigned> q;
+int main(){
+    int n; cin >> n;
+	memset(way, -1, sizeof(way));
+	for(i=1;i<=n;++i)
+		scanf("%u",&a[i]);
+	way[1]=0;
+	q.push(1);
+	while(!q.empty()){
+		int f=q.front();
+		q.pop();
+		if(f>1&&way[f-1]<0){
+			way[f-1]=way[f]+1;
+			q.push(f-1);
+		}
+		if(way[f+1]<0){
+			way[f+1]=way[f]+1;
+			q.push(f+1);
+		}
+        if(way[a[f]]<0){
+			way[a[f]]=way[f]+1;
+			q.push(a[f]);
+		}
+	}
+	for(i=1;i<=n;++i)
+		printf("%d ",way[i]);
+	return 0;
+}
+using namespace std;
+int main() {
+    int n;
+    cin >> n;
+    vector<int> a(n + 1);
+    vector<int> dist(n + 1, -1);
+    queue<int> q;
+    for (int i = 1; i <= n; ++i) {
+        cin >> a[i];
+    }
+    dist[1] = 0;
+    q.push(1);
+    while (!q.empty()) {
+        int cur = q.front();
+        q.pop();
+        if (cur > 1 && dist[cur - 1] == -1) {
+            dist[cur - 1] = dist[cur] + 1;
+            q.push(cur - 1);
+        }
+        if (cur < n && dist[cur + 1] == -1) {
+            dist[cur + 1] = dist[cur] + 1;
+            q.push(cur + 1);
+        }
+        if (dist[a[cur]] == -1) {
+            dist[a[cur]] = dist[cur] + 1;
+            q.push(a[cur]);
+        }
+    }
+    for (int i = 1; i <= n; ++i) {
+        cout << dist[i] << " ";
+    }
+    cout << endl;
+    return 0;
+}
+
 using namespace std;
 http://codeforces.com/problemset/problem/705/A
 // 705A. Hulk
