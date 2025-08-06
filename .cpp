@@ -1,3 +1,64 @@
+https://codeforces.com/problemset/problem/4/B
+// B. Before an Exam
+using namespace std;
+int main(){
+    int d, sumTime, minTime[30], maxTime[30];
+    scanf("%d%d", &d, &sumTime);
+    for (int i = 0; i < d; ++i)
+    {
+        scanf("%d%d", &minTime[i], &maxTime[i]);
+    }
+    int minTimeSum = accumulate(minTime, minTime + d, 0);
+    int maxTimeSum = accumulate(maxTime, maxTime + d, 0);
+    if (minTimeSum <= sumTime && sumTime <= maxTimeSum)
+    {
+        printf("YES\n");
+        for (int i = 0; i < d; ++i)
+        {
+            int t = min(minTime[i] + sumTime - minTimeSum, maxTime[i]);
+            printf((i + 1 < d ? "%d " : "%d\n"), t);
+            sumTime -= (t - minTime[i]);
+        }
+    }
+    else
+    {
+        printf("NO\n");
+    }
+    return 0;
+}
+using namespace std;
+int main() {
+    int d, sumTime;
+    cin >> d >> sumTime;
+    vector<int> minTime(d), maxTime(d);
+    for (int i = 0; i < d; ++i) {
+        cin >> minTime[i] >> maxTime[i];
+    }
+    int minTotal = accumulate(minTime.begin(), minTime.end(), 0);
+    int maxTotal = accumulate(maxTime.begin(), maxTime.end(), 0);
+
+    if (sumTime < minTotal || sumTime > maxTotal) {
+        cout << "NO" << endl;
+        return 0;
+    }
+
+    cout << "YES" << endl;
+    vector<int> result(d);
+
+    for (int i = 0; i < d; ++i) {
+        int extra = min(sumTime - minTotal, maxTime[i] - minTime[i]);
+        result[i] = minTime[i] + extra;
+        sumTime -= extra;
+        minTotal += extra;
+    }
+
+    for (int t : result) {
+        cout << t << " ";
+    }
+    cout << endl;
+    return 0;
+}
+
 https://codeforces.com/problemset/problem/6/A
 // A. Triangle
 using namespace std;
