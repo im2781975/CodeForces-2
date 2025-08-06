@@ -583,6 +583,46 @@ int main() {
     if (aNoZero + bNoZero == sumNoZero)    cout << "YES\n";
     else    cout << "NO\n";
 }
+https://codeforces.com/problemset/problem/79/A
+// A. Bus Game
+using namespace std;
+int main(){
+    int x, y;
+    cin >> x >> y;
+    // Balance initial resources if both players can perform same max turns
+    int turns = min(x / 2, y / 24);
+    x -= 2 * turns;
+    y -= 24 * turns;
+
+    while (true) {
+        // Ciel's turn: Try best move in order of priority
+        if (x >= 2 && y >= 2) {
+            x -= 2;
+            y -= 2;
+        } else if (x >= 1 && y >= 12) {
+            x -= 1;
+            y -= 12;
+        } else if (y >= 22) {
+            y -= 22;
+        } else {
+            cout << "Hanako" << endl;
+            break;
+        }
+        // Hanako's turn: Try best move in order of priority
+        if (y >= 22) {
+            y -= 22;
+        } else if (x >= 1 && y >= 12) {
+            x -= 1;
+            y -= 12;
+        } else if (x >= 2 && y >= 2) {
+            x -= 2;
+            y -= 2;
+        } else {
+            cout << "Ciel" << endl;
+            break;
+        }
+    }
+}
 using namespace std;
 http://codeforces.com/problemset/problem/80/A
 // 80A - Panoramix's Prediction
