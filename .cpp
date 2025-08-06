@@ -329,7 +329,13 @@ int main() {
         cout << endl;
     }
 }
-
+https://codeforces.com/problemset/problem/50/A
+// A. Domino piling
+using namespace std;
+int main(){
+    int M, N; cin >> M >> N;
+    cout << M * N / 2 << endl;
+}
 using namespace std;
 // A. Domino piling
 // problemset/problem/50/A
@@ -369,6 +375,58 @@ int main() {
     cout << (isHelloSubsequence(input)) ? "YES" : "NO";
 }
 using namespace std;
+int main(){
+    string s; cin >> s;
+    size_t pos = 0;
+    while (pos < s.length() && s[pos] != 'h')
+        ++pos;
+    ++pos;
+    while (pos < s.length() && s[pos] != 'e')
+        ++pos;
+    ++pos;
+    while (pos < s.length() && s[pos] != 'l')
+        ++pos;
+    ++pos;
+    while (pos < s.length() && s[pos] != 'l')
+        ++pos;
+    ++pos;
+    while (pos < s.length() && s[pos] != 'o')
+        ++pos;
+    cout << (pos < s.length())? "YES" : "NO";
+}
+using namespace std;
+int main() {
+    string s; cin >> s;
+    string target = "hello";
+    size_t idx = 0;
+    for (char ch : s) {
+        if (ch == target[idx])
+            ++idx;
+        if (idx == target.size())
+            break;
+    }
+    cout << (idx == target.size() ? "YES" : "NO") << endl;
+}
+
+#include <iostream>
+https://codeforces.com/problemset/problem/58/B
+// B. Coins
+using namespace std;
+int main() {
+    int n; cin >> n;
+    while (n != 1) {
+        cout << n << " ";
+        for (int i = 2; i <= n; ++i) {
+            if (n % i == 0) {
+                n /= i;
+                break;
+            }
+        }
+    }
+    cout << 1 << endl;
+}
+
+using namespace std;
 http://codeforces.com/contest/59/problem/A
 // A. Word
 string toupp(string s){
@@ -397,6 +455,22 @@ int main(){
     cout << s;
 }
 using namespace std;
+int main(){
+    string s; cin >> s;
+    int upper(0), lower(0);
+    for (size_t i = 0; i < s.length(); ++i){
+        if (isupper(s[i]))    upper++;
+        else    lower++;
+    }
+    if (upper > lower){
+        for (size_t i = 0; i < s.length(); ++i)    s[i] = toupper(s[i]);
+    }
+    else{
+        for (size_t i = 0; i < s.length(); ++i)    s[i] = tolower(s[i]);
+    }
+    cout << s << endl;
+}
+using namespace std;
 http://codeforces.com/problemset/problem/61/A
 // Ultra-Fast Mathematician
 int main() {
@@ -418,6 +492,17 @@ int main(){
 	
     }
     cout << s2;
+}
+using namespace std;
+int main(){
+    string s1, s2;
+    cin >> s1 >> s2;
+    for (size_t i = 0; i < s1.length(); ++i){
+        if (s1[i] == s2[i])    s1[i] = '0';
+        else    s1[i] = '1';
+    }
+    cout << s1 << endl;
+    return 0;
 }
 https://codeforces.com/problemset/problem/63/A
 // A. Sinking Ship
