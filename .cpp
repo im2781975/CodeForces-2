@@ -1,3 +1,32 @@
+https://codeforces.com/problemset/problem/6/A
+// A. Triangle
+using namespace std;
+
+int main() {
+    int length[4];
+    for (int i = 0; i < 4; ++i) {
+        cin >> length[i];
+    }
+    sort(length, length + 4);
+    bool triangle = false, segment = false;
+    for (int i = 0; i < 2; ++i) {
+        int a = length[i], b = length[i + 1], c = length[i + 2];
+        if (a + b > c) {
+            triangle = true;
+        } else if (a + b == c) {
+            segment = true;
+        }
+    }
+
+    if (triangle) {
+        cout << "TRIANGLE" << endl;
+    } else if (segment) {
+        cout << "SEGMENT" << endl;
+    } else {
+        cout << "IMPOSSIBLE" << endl;
+    }
+}
+
 #include <iostream>
 #include <vector>
 #include <string>
@@ -545,6 +574,72 @@ int main() {
 		else cout << s << '\n';
 	}
 }
+//4004040   Jul 2, 2013 8:47:17 PM	fuwutu	 71A - Way Too Long Words	 GNU C++0x	Accepted	 15 ms	 0 KB
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    int n;
+    string s;
+    cin >> n;
+    while (n--)
+    {
+        cin >> s;
+        if (s.length() > 10)
+        {
+            cout << s[0] << s.length() - 2 << s[s.length() - 1] << endl;
+        }
+        else
+        {
+            cout << s << endl;
+        }
+    }
+    return 0;
+}
+https://codeforces.com/problemset/problem/74/A
+// A. Room Leader
+using namespace std;
+int main(){
+    int n, plus, minus, a, b, c, d, e, top(-2501);
+    string handle, leader;
+    cin >> n;
+    while (n--){
+        cin >> handle >> plus >> minus >> a >> b >> c >> d >> e;
+        int points = plus * 100 - minus * 50 + a + b + c + d + e;
+        if (points > top){
+            leader = handle;
+            top = points;
+        }
+    }
+    cout << leader;
+    return 0;
+}
+using namespace std;
+int main() {
+    int n;
+    cin >> n;
+
+    string leader;
+    int highestScore = -2501;
+
+    while (n--) {
+        string name;
+        int plus, minus, a, b, c, d, e;
+        cin >> name >> plus >> minus >> a >> b >> c >> d >> e;
+
+        int score = plus * 100 - minus * 50 + a + b + c + d + e;
+
+        if (score > highestScore) {
+            highestScore = score;
+            leader = name;
+        }
+    }
+
+    cout << leader << endl;
+    return 0;
+}
 https://codeforces.com/contest/75/problem/A
 // A. Life Without Zeros
 using namespace std;
@@ -582,6 +677,111 @@ int main() {
     long long sumNoZero = removeZeros(sum);
     if (aNoZero + bNoZero == sumNoZero)    cout << "YES\n";
     else    cout << "NO\n";
+}
+#include <iostream>
+using namespace std;
+int removeZeros(int n) {
+    int result = 0, multiplier = 1;
+    while (n > 0) {
+        int digit = n % 10;
+        n /= 10;
+        if (digit != 0) {
+            result += digit * multiplier;
+            multiplier *= 10;
+        }
+    }
+    return result;
+}
+
+int main() {
+    int a, b;
+    cin >> a >> b;
+
+    int sum = a + b;
+
+    int aNoZeros = removeZeros(a);
+    int bNoZeros = removeZeros(b);
+    int sumNoZeros = removeZeros(sum);
+
+    cout << (aNoZeros + bNoZeros == sumNoZeros ? "YES" : "NO") << endl;
+
+    return 0;
+}
+using namespace std;
+int remove0(int n)
+{
+    int m(0), pow(1);
+    while (n != 0)
+    {
+        int d = n % 10;
+        n /= 10;
+        if (d != 0)
+        {
+            m += d * pow;
+            pow *= 10;
+        }
+    }
+    return m;
+}
+
+int main()
+{
+    int a, b;
+    cin >> a >> b;
+    int c = a + b;
+    int A = remove0(a);
+    int B = remove0(b);
+    int C = remove0(c);
+    cout << (A + B == C ? "YES" : "NO") << endl;
+    return 0;
+}
+#include <iostream>
+#include <string>
+https://codeforces.com/problemset/problem/78/A
+// A. Haiku
+using namespace std;
+
+bool isVowel(char ch) {
+    ch = tolower(ch);
+    return ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u';
+}
+int countVowels(const string& line) {
+    int count = 0;
+    for (char ch : line) {
+        if (isVowel(ch)) {
+            ++count;
+        }
+    }
+    return count;
+}
+int main() {
+    int expectedSyllables[3] = {5, 7, 5};
+    bool isHaiku = true;
+    string line;
+    for (int i = 0; i < 3; ++i) {
+        getline(cin, line);
+        if (countVowels(line) != expectedSyllables[i]) {
+            isHaiku = false;
+        }
+    }
+    cout << (isHaiku ? "YES" : "NO") << endl;
+    return 0;
+}
+using namespace std;
+int main(){
+    char ch[101];
+    int syllables[3] = {5, 7, 5};
+    bool haiku(true);
+    for (int i = 0; i < 3; ++i){
+        cin.getline(ch, sizeof(ch) / sizeof(ch[0]));
+        int n = 0;
+        for (int j = 0; ch[j] != 0; ++j){
+            if (ch[j] == 'a' || ch[j] == 'e' || ch[j] == 'i' || ch[j] == 'o' || ch[j] == 'u')    n++;
+        }
+        if (n != syllables[i])    haiku = false;
+    }
+    cout << (haiku ? "YES" : "NO") << endl;
+    return 0;
 }
 https://codeforces.com/problemset/problem/79/A
 // A. Bus Game
