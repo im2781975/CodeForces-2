@@ -1,3 +1,58 @@
+https://codeforces.com/problemset/problem/3/A
+// A. Shortest path of the king
+using namespace std;
+int main() {
+    string start, end; cin >> start >> end;
+    int dx = abs(start[0] - end[0]);
+    int dy = abs(start[1] - end[1]);
+
+    cout << max(dx, dy) << '\n';
+
+    while (start != end) {
+        string move = "";
+
+        if (start[0] < end[0]) {
+            move += 'R';
+            ++start[0];
+        } else if (start[0] > end[0]) {
+            move += 'L';
+            --start[0];
+        }
+
+        if (start[1] < end[1]) {
+            move += 'U';
+            ++start[1];
+        } else if (start[1] > end[1]) {
+            move += 'D';
+            --start[1];
+        }
+        cout << move << '\n';
+    }
+}
+using namespace std;
+int main(){
+    string s, t; cin >> s >> t;
+    cout << max(abs(s[0] - t[0]), abs(s[1] - t[1])) << endl;
+    while (s != t){
+        if (s[0] < t[0]){
+            cout << "R";
+            s[0] += 1;
+        }
+        else if (s[0] > t[0]){
+            cout << "L";
+            s[0] -= 1;
+        }
+        if (s[1] < t[1]){
+            cout << "U";
+            s[1] += 1;
+        }
+        else if (s[1] > t[1]) {
+            cout << "D";
+            s[1] -= 1;
+        }
+        cout << endl;
+    }
+}
 https://codeforces.com/problemset/problem/4/B
 // B. Before an Exam
 using namespace std;
@@ -229,6 +284,172 @@ int main() {
     }
     cout << result;
 }
+https://codeforces.com/problemset/problem/34/A
+// A. Reconnaissance 2
+using namespace std;
+int main() {
+    int n; cin >> n;
+    vector<int> heights(n);
+    for (int& h : heights)
+        cin >> h;
+    int min_diff = numeric_limits<int>::max();
+    int idx1 = 0, idx2 = 1;
+    for (int i = 0; i < n; ++i) {
+        int next = (i + 1) % n;  
+        int diff = abs(heights[i] - heights[next]);
+        if (diff < min_diff) {
+            min_diff = diff;
+            idx1 = i;
+            idx2 = next;
+        }
+    }
+    cout << idx1 + 1 << " " << idx2 + 1 << endl;
+    return 0;
+}
+using namespace std;
+int main(){
+    int n, a1; cin >> n >> a1;
+    int prev(a1), cur, rec(1000), index1, index2;
+    for (int i = 2; i <= n; ++i) {
+        cin >> cur;
+        int diff = abs(cur - prev);
+        if (diff < rec) {
+            rec = diff;
+            index1 = i - 1;
+            index2 = i;
+        }
+        prev = cur;
+    }
+    int diff = abs(a1 - prev);
+    if (diff < rec){
+        index1 = n;
+        index2 = 1;
+    }
+    cout << index1 << " " << index2 << endl;
+}
+https://codeforces.com/problemset/problem/34/B
+// B. Sale
+using namespace std;
+int main(){
+    int n, m, a[100];
+    cin >> n >> m;
+    for (int i = 0; i < n; ++i)    cin >> a[i];
+    sort(a, a + n);
+    int s = 0;
+    for (int i = 0; i < m; ++i){
+        if (a[i] >= 0)    break;
+        s += a[i];
+    }
+    cout << -s << endl;
+}
+int main() {
+    int n, m; cin >> n >> m;
+    vector<int> prices(n);
+    for (int& price : prices)
+        cin >> price;
+    sort(prices.begin(), prices.end());
+    int savings = 0;
+    for (int i = 0; i < m && prices[i] < 0; ++i)
+        savings -= prices[i];
+    cout << savings << endl;
+    return 0;
+}
+
+https://codeforces.com/problemset/problem/35/A
+// A. Shell Game
+using namespace std;
+int main(){
+    int x, a, b, cup[4] = {0};
+    cin >> x;
+    cup[x] = 1;
+    cin >> a >> b; swap(cup[a], cup[b]);
+    cin >> a >> b; swap(cup[a], cup[b]);
+    cin >> a >> b; swap(cup[a], cup[b]);
+    printf("%d\n", find(cup + 1, cup + 3 + 1, 1) - cup);
+}
+using namespace std;
+int main() {
+    array <int, 4> cup{};
+    int x, a, b; cin >> x;
+    cup[x] = 1;
+    for (int i = 0; i < 3; ++i){
+        cin >> a >> b;
+        swap(cup[a], cup[b]);
+    }
+    for (int i = 1; i <= 3; ++i) {
+        if (cup[i] == 1) {
+            cout << i << endl;
+            break;
+        }
+    }
+}
+
+https://codeforces.com/problemset/problem/37/A
+// A. Towers
+using namespace std;
+int main(){
+    int n, l, h[1001] = {0};
+    cin >> n;
+    while (n--){
+        cin >> l;
+        h[l] += 1;
+    }
+    int height = *max_element(h, h + 1001);
+    int number = 1001 - count(h, h + 1001, 0);
+    cout << height << " " << number << endl;
+}
+using namespace std;
+int main() {
+    const int MAX_HEIGHT = 1001;
+    array<int, MAX_HEIGHT> heightFrequency{};
+    int n; cin >> n;
+    for (int i = 0, l; i < n; ++i) {
+        cin >> l;
+        ++heightFrequency[l];
+    }
+    int tallestTower = *max_element(heightFrequency.begin(), heightFrequency.end());
+    int numberOfTowers = count_if(heightFrequency.begin(), heightFrequency.end(), [](int h) {
+        return h > 0;
+    });
+    cout << tallestTower << " " << numberOfTowers << '\n';
+}
+https://codeforces.com/problemset/problem/38/A
+// A. Army
+using namespace std;
+int main(){
+    int n, d[100] = {0}, a, b;
+    cin >> n;
+    for (int i = 1; i < n; ++i)
+        cin >> d[i];
+    cin >> a >> b;
+    cout << accumulate(d + a, d + b, 0) << endl;
+    return 0;
+}
+https://codeforces.com/problemset/problem/40/A
+// A. Find Color
+using namespace std;
+int main(){
+    int x, y; cin >> x >> y;
+    int r2 = x * x + y * y;
+    int r = floor(sqrt(static_cast<double>(r2)));
+    if (r * r < r2 && (r + 1) * (r + 1) > r2
+        && (r % 2 == 1 && x * y > 0 || r % 2 == 0 && x * y < 0))    cout << "white";
+    else    cout << "black";
+}
+using namespace std;
+int main() {
+    int x, y;
+    cin >> x >> y;
+    int r2 = x * x + y * y;
+    int r = static_cast<int>(floor(sqrt(r2)));
+    bool isBetweenCircles = (r * r < r2 && (r + 1) * (r + 1) > r2);
+    bool isWhite = (r % 2 == 1 && x * y > 0) || (r % 2 == 0 && x * y < 0);
+    if (isBetweenCircles && isWhite)
+        cout << "white\n";
+    else
+        cout << "black\n";
+}
+
 using namespace std;
 http://codeforces.com/contest/41/problem/A
 // A. Translation
@@ -334,6 +555,56 @@ int main() {
     cout << winner << endl;
 }
 using namespace std;
+int main(){
+    int n, goal(0);
+    cin >> n;
+    string team, win;
+    while (n--){
+        if (goal != 0){
+            cin >> team;
+            if (team == win)    goal++;
+            else    goal--;
+        }
+        else{
+            cin >> win;
+            goal = 1;
+        }
+    }
+    cout << win << endl;
+}
+https://codeforces.com/problemset/problem/46/A
+// A. Ball Game
+using namespace std;
+int main(){
+    int n, c = 2;
+    cin >> n;
+    cout << c;
+    for (int i = 2; i < n; ++i){
+        c += i;
+        if (c > n)    c -= n;
+        cout << " " << c;
+    }
+    cout << endl;
+    return 0;
+}
+https://codeforces.com/problemset/problem/47/A
+// 47A - Triangular numbers
+using namespace std;
+int main() {
+    int n; cin >> n;
+    int triangular = 1, i = 1;
+    while (triangular < n) {
+        ++i;
+        triangular += i;
+    }
+    if (triangular == n)
+        cout << "YES" << endl;
+    else
+        cout << "NO" << endl;
+
+    return 0;
+}
+using namespace std;
 http://codeforces.com/contest/47/problem/B
 // 47B. Coins;
 int main() {
@@ -390,6 +661,28 @@ int main() {
         cout << endl;
     }
 }
+#include <iostream>
+#include <string>
+#include <cctype>
+https://codeforces.com/problemset/problem/49/A
+// A. Sleuth
+using namespace std;
+bool isVowel(char ch) {
+    ch = tolower(ch);
+    return ch == 'a' || ch == 'e' || ch == 'i' || ch == 'o' || ch == 'u' || ch == 'y';
+}
+int main() {
+    string s; getline(cin, s);
+    char lastAlpha = '\0';
+    for (int i = s.size() - 1; i >= 0; --i) {
+        if (isalpha(s[i])) {
+            lastAlpha = s[i];
+            break;
+        }
+    }
+    cout << (isVowel(lastAlpha) ? "YES" : "NO") << endl;
+}
+
 https://codeforces.com/problemset/problem/50/A
 // A. Domino piling
 using namespace std;
