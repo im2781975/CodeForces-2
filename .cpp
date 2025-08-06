@@ -1,3 +1,71 @@
+https://codeforces.com/problemset/problem/2/A
+// A. Winner
+using namespace std;
+int main(){
+    int n; cin >> n;
+    vector<pair<string, int>> rounds(n);
+    map<string, int> player2score;
+    for (int i = 0; i < n; ++i){
+        cin >> rounds[i].first >> rounds[i].second;
+        player2score[rounds[i].first] += rounds[i].second;
+    }
+    set<string> winners;
+    int m(-1000001);
+    for (map<string, int>::iterator it = player2score.begin(); it != player2score.end(); ++it){
+        if (it->second > m){
+            m = it->second;
+            winners.clear();
+            winners.insert(it->first);
+        }
+        else if (it->second == m)
+            winners.insert(it->first);
+    }
+    if (winners.size() > 1) {
+        player2score.clear();
+        for (vector<pair<string, int>>::iterator it = rounds.begin(); it != rounds.end(); ++it){
+            player2score[it->first] += it->second;
+            if (player2score[it->first] >= m && winners.count(it->first) == 1){
+                winners.clear();
+                winners.insert(it->first);
+                break;
+            }
+        }
+    }
+    cout << *winners.begin() << endl;
+    return 0;
+}
+using namespace std;
+int main() {
+    int n; cin >> n;
+    vector<pair<string, int>> rounds(n);
+    map<string, int> player_score;
+    for (int i = 0; i < n; ++i) {
+        cin >> rounds[i].first >> rounds[i].second;
+        player_score[rounds[i].first] += rounds[i].second;
+    }
+    int max_score = INT32_MIN;
+    set<string> candidates;
+    for (const auto& [name, score] : player_score) {
+        if (score > max_score) {
+            max_score = score;
+            candidates.clear();
+            candidates.insert(name);
+        } else if (score == max_score)
+            candidates.insert(name);
+    }
+    if (candidates.size() > 1) {
+        player_score.clear();
+        for (const auto& [name, score] : rounds) {
+            player_score[name] += score;
+            if (player_score[name] >= max_score && candidates.count(name)) {
+                cout << name << endl;
+                return 0;
+            }
+        }
+    } else
+        cout << *candidates.begin() << endl;
+}
+
 https://codeforces.com/problemset/problem/3/A
 // A. Shortest path of the king
 using namespace std;
@@ -263,6 +331,50 @@ int main(){
             st.push(ch);
     }
     cout << cnt * 2;
+}
+https://codeforces.com/problemset/problem/31/A
+// A. Worms Evolution
+using namespace std;
+int main() {
+    int n; cin >> n;
+    vector<int> a(n + 1);
+    for (int i = 1; i <= n; ++i)
+        cin >> a[i];
+    bool found = false;
+    for (int i = 1; !found && i <= n; ++i) {
+        for (int j = 1; !found && j <= n; ++j) {
+            if (j == i) continue;
+            for (int k = j + 1; k <= n; ++k) {
+                if (k == i) continue;
+                if (a[i] == a[j] + a[k]) {
+                    cout << i << " " << j << " " << k << endl;
+                    found = true;
+                    break;
+                }
+            }
+        }
+    }
+    if (!found)    cout << -1 << endl;
+}
+using namespace std;
+int main(){
+    int n, a[101]; cin >> n;
+    for (int i = 1; i <= n; ++i)    cin >> a[i];
+    bool found = false;
+    for (int i = 1; !found && i <= n; ++i){
+        for (int j = 1; !found && j <= n; ++j){
+            if (j != i){
+                for (int k = j + 1; k <= n; ++k){
+                    if (k != i && a[i] == a[j] + a[k]){
+                        cout << i << " " << j << " " << k;
+                        found = true;
+                        break;
+                    }
+                }
+            }
+        }
+    }
+    if(!found)    cout << -1;
 }
 https://codeforces.com/problemset/problem/32/A
 // A. Reconnaissance
