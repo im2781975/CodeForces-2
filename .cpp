@@ -264,6 +264,40 @@ int main(){
     cout << answer;
     return 0;
 }
+#include <iostream>
+https://codeforces.com/problemset/problem/11/A
+// A. Increasing Sequence
+using namespace std;
+int main() {
+    int n, d, prev, curr, moves = 0;
+    cin >> n >> d >> prev;
+    for (int i = 1; i < n; ++i) {
+        cin >> curr;
+        if (curr <= prev) {
+            int x = (prev - curr) / d + 1;
+            moves += x;
+            curr += x * d;
+        }
+        prev = curr;
+    }
+    cout << moves << endl;
+    return 0;
+}
+using namespace std;
+int main(){
+    int n, d, b0, b, moves = 0;
+    cin >> n >> d >> b0;
+    while (--n) {
+        cin >> b0;
+        if (b <= b0){
+            int x = (b0 - b) / d + 1;
+            moves += x;
+            b0 = b + x * d;
+        }
+        else    b0 = b;
+    }
+    cout << moves;
+}
 https://codeforces.com/problemset/problem/12/A
 // A. Super Agent
 using namespace std;
