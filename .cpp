@@ -264,6 +264,32 @@ int main(){
     cout << answer;
     return 0;
 }
+#include <iostream>
+#include <vector>
+#include <string>
+https://codeforces.com/problemset/problem/16/A
+// A. Flag
+using namespace std;
+int main() {
+    int n, m; cin >> n >> m;
+    string prevRow;
+    bool valid = true;
+    for (int i = 0; i < n; ++i) {
+        string row; cin >> row;
+        for (int j = 1; j < m; ++j) {
+            if (row[j] != row[0]) {
+                valid = false;
+                break;
+            }
+        }
+        if (i > 0 && row[0] == prevRow[0]) 
+            valid = false;
+        if (!valid) break;
+        prevRow = row;
+    }
+    cout << (valid ? "YES" : "NO") << endl;
+}
+
 #include <cstdio>
 #include <algorithm>
 https://codeforces.com/problemset/problem/22/A
