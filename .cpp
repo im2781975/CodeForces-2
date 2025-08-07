@@ -264,6 +264,115 @@ int main(){
     cout << answer;
     return 0;
 }
+https://codeforces.com/problemset/problem/12/A
+// A. Super Agent
+using namespace std;
+int main() {
+    string symbols[3];
+    for (int i = 0; i < 3; ++i)
+        cin >> symbols[i];
+    bool isMirror = (
+        symbols[0][0] == symbols[2][2] &&
+        symbols[0][1] == symbols[2][1] &&
+        symbols[0][2] == symbols[2][0] &&
+        symbols[1][0] == symbols[1][2]
+    );
+    cout << (isMirror ? "YES" : "NO") << endl;
+}
+
+https://codeforces.com/problemset/problem/12/B
+// B. Correct Solution?
+using namespace std;
+int main() {
+    int n;
+    string m;
+    cin >> n >> m;
+    string digits;
+    while (n > 0) {
+        digits += char('0' + n % 10);
+        n /= 10;
+    }
+    sort(digits.begin(), digits.end());
+    if (digits[0] == '0') {
+        for (size_t i = 1; i < digits.size(); ++i) {
+            if (digits[i] != '0') {
+                swap(digits[0], digits[i]);
+                break;
+            }
+        }
+    }
+    cout << (digits == m ? "OK" : "WRONG_ANSWER") << endl;
+}
+using namespace std;
+int main(){
+    int n;
+    char m[11], digit[10] = {'0'}, digitcount(0);
+    cin >> n >> m;
+    while (n != 0){
+        digit[digitcount++] = '0' + n % 10;
+        n /= 10;
+    }
+    sort(digit, digit + digitcount);
+    if (digit[0] == '0'){
+        for (int i = 1; i < digitcount; ++i){
+            if (digit[i] != '0'){
+                digit[0] = digit[i];
+                digit[i] = '0';
+                break;
+            }
+        }
+    }
+    printf(strcmp(m, digit) == 0 ? "OK\n" : "WRONG_ANSWER\n");
+}
+
+https://codeforces.com/problemset/problem/13/A
+// A. Numbers
+using namespace std;
+int sumOfDigitsInBase(int number, int base) {
+    int sum = 0;
+    while (number) {
+        sum += number % base;
+        number /= base;
+    }
+    return sum;
+}
+int main() {
+    int A; cin >> A;
+    int totalDigitSum = 0;
+    for (int base = 2; base < A; ++base) {
+        totalDigitSum += sumOfDigitsInBase(A, base);
+    }
+    int denominator = A - 2;
+    int gcd = gcd(totalDigitSum, denominator); 
+    cout << totalDigitSum / gcd << "/" << denominator / gcd << endl;
+}
+using namespace std;
+int GCD(int m, int n){
+    int r = m % n;
+    while (r != 0){
+        m = n;
+        n = r;
+        r = m % n;
+    }
+    return n;
+}
+int main(){
+    int A; cin >> A;
+    int X = 0, Y = A - 2;
+    for (int i = 2; i < A; ++i){
+        int n(A), ds(0);
+        while (n != 0){
+            ds += n % base;
+            n /= base;
+        }
+        X += ds;
+    }
+    int gcd = GCD(X, Y);
+    X /= gcd;
+    Y /= gcd;
+    cout << x << " " << y;
+    return 0;
+}
 #include <iostream>
 #include <vector>
 #include <string>
