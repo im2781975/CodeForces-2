@@ -264,6 +264,42 @@ int main(){
     cout << answer;
     return 0;
 }
+#include <cstdio>
+#include <algorithm>
+https://codeforces.com/problemset/problem/22/A
+// A. Second Order Statistics
+using namespace std;
+int main(){
+    int n, a[101]; cin >> n;
+    for (int i = 1; i <= n; ++i)    cin >> a[i];
+    int x = *min_element(a + 1, a + n + 1);
+    int value2(x);
+    for (int i = 1; i <= n; ++i) {
+        if (a[i] > x) {
+            if (value2 == x || a[i] < value2)    value2 = a[i];
+        }
+    }
+    cout << (value2 != x) ? value2 : "NO";
+    return 0;
+}
+using namespace std;
+int main() {
+    int n; cin >> n;
+    vector<int> a(n);
+    for (int &num : a)
+        cin >> num;
+    sort(a.begin(), a.end());
+    int min_val = a[0];
+    int second_val = -1;
+    for (int i = 1; i < n; ++i) {
+        if (a[i] > min_val) {
+            second_val = a[i];
+            break;
+        }
+    }
+    cout << (second_val != -1) ? second_val : "NO";
+    return 0;
+}
 https://codeforces.com/problemset/problem/23/A
 // A. You're Given a String...
 using namespace std;
