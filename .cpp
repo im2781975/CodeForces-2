@@ -264,6 +264,36 @@ int main(){
     cout << answer;
     return 0;
 }
+https://codeforces.com/problemset/problem/23/A
+// A. You're Given a String...
+using namespace std;
+int main() {
+    string s; cin >> s;
+    int n = s.length();
+    int m = n - 1;
+    while (m > 0) {
+        bool found = false;
+        for (int i = 0; i <= n - m; ++i) {
+            for (int j = i + 1; j <= n - m; ++j) {
+                bool match = true;
+                for (int k = 0; k < m; ++k) {
+                    if (s[i + k] != s[j + k]) {
+                        match = false;
+                        break;
+                    }
+                }
+                if (match) {
+                    found = true;
+                    break;
+                }
+            }
+            if (found) break;
+        }
+        if (found) break;
+        m--;
+    }
+    cout << m << endl;
+}
 using namespace std;
 // A. IQ test
 // problemset/problem/25/A
@@ -314,6 +344,61 @@ int main() {
 	return 0;
 }
 using namespace std;
+int main(){
+    int n, x, even(0), lastodd(0), lasteven(0);
+    cin >> n;
+    for (int i = 1; i <= n; ++i){
+        cin >> x;
+        if (x % 2 == 0) {
+            even += 1;
+            lasteven = i;
+        }
+        else {
+            even -= 1;
+            lastodd = i;
+        }
+    }
+    cout << (even > 0 ? lastodd : lasteven) << endl;
+}
+https://codeforces.com/problemset/problem/26/A
+// A. Almost Prime
+using namespace std;
+int main(){
+    int n, amount = 0; cin >> n;
+    bool b[3001] = {false};
+    int pfactors[3001] = {0};
+    for (int i = 2; i <= n; ++i){
+        if (!b[i]){
+            for (int j = i + i; j <= n; j += i){
+                b[j] = true;
+                pfactors[j] += 1;
+            }
+        }
+        if (pfactors[i] == 2)    amount++;
+    }
+    cout << amount << endl;
+    return 0;
+}
+using namespace std;
+int main() {
+    int n, count = 0; cin >> n;
+    vector<bool> isComposite(n + 1, false);
+    vector<int> primeFactorCount(n + 1, 0);
+    for (int i = 2; i <= n; ++i) {
+        if (!isComposite[i]) {
+            for (int j = i * 2; j <= n; j += i) {
+                isComposite[j] = true;
+                primeFactorCount[j]++;
+            }
+        }
+    }
+    for (int i = 2; i <= n; ++i) {
+        if (primeFactorCount[i] == 2)  count++;
+    }
+    cout << count << endl;
+}
+
+using namespace std;
 // problemset/problem/26/B
 // B. Regular Bracket Sequence
 int main(){
@@ -331,6 +416,43 @@ int main(){
             st.push(ch);
     }
     cout << cnt * 2;
+}
+https://codeforces.com/problemset/problem/27/A
+// A. Next Test
+using namespace std;
+int main() {
+    int n, num; cin >> n;
+    set <int> s;
+    while (n--) {
+        cin >> num;
+        s.insert(num);
+    }
+    for (int i = 1; i <= 3001; ++i) {
+        if (s.find(i) == s.end()) {
+            cout << i << endl;
+            break;
+        }
+    }
+}
+https://codeforces.com/problemset/problem/29/A
+// A. Spit Problem
+using namespace std;
+int main(){
+    int n, x[100], d[100];
+    bool spitted = false;
+    scanf("%d", &n);
+    for (int i = 0; i < n; ++i){
+        cin >> x[i] >> d[i];
+        for (int j = 0; j < i; ++j){
+            if (x[i] + d[i] == x[j] && x[j] + d[j] == x[i]){
+                spitted = true;
+                break;
+            }
+        }
+        if (spitted)    break;
+    }
+    cout << spitted ? "YES" : "NO";
+    return 0;
 }
 https://codeforces.com/problemset/problem/31/A
 // A. Worms Evolution
