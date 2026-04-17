@@ -2044,3 +2044,693 @@ else:
         a, b = b, a + b
     print(0, a, b)
     
+// 200B
+//4033618   Jul 7, 2013 11:40:55 AM	fuwutu	 200B - Drinks	 GNU C++0x	Accepted	 15 ms	 0 KB
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    int n, p, total(0);
+    cin >> n;
+    for (int i = 0; i < n; ++i)
+    {
+        cin >> p;
+        total += p;
+    }
+    cout << static_cast<double>(total) / static_cast<double>(n) << endl;
+    return 0;
+}
+// 203A
+//4172437   Jul 27, 2013 5:48:18 AM	fuwutu	 203A - Two Problems	 GNU C++0x	Accepted	30 ms	0 KB
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    int x, t, a, b, da, db;
+    cin >> x >> t >> a >> b >> da >> db;
+    if (x == 0)
+    {
+        cout << "YES" << endl;
+        return 0;
+    }
+
+    if (x == 0
+        || (x <= a && x > a - da * t && (a - x) % da == 0)
+        || (x <= b && x > b - db * t && (b - x) % db == 0))
+    {
+        cout << "YES" << endl;
+        return 0;
+    }
+
+    for (int pa = a, pb = b - db * (t - 1); pa > a - da * t && pb <= b; )
+    {
+        if (pa + pb > x)
+        {
+            pa -= da;
+        }
+        else if (pa + pb < x)
+        {
+            pb += db;
+        }
+        else
+        {
+            cout << "YES" << endl;
+            return 0;
+        }
+    }
+    cout << "NO" << endl;
+    return 0;
+}
+// 205A
+//4035181   Jul 7, 2013 6:43:30 PM	fuwutu	 205A - Little Elephant and Rozdil	 GNU C++0x	Accepted	46 ms	0 KB
+#include <cstdio>
+
+using namespace std;
+
+int main()
+{
+    int n, time, min_time(1000000001), min_index(0), count(1);
+    scanf("%d", &n);
+    for (int i = 1; i <= n; ++i)
+    {
+        scanf("%d", &time);
+        if (time < min_time)
+        {
+            min_time = time;
+            min_index = i;
+            count = 1;
+        }
+        else if (time == min_time)
+        {
+            count += 1;
+        }
+    }
+    if (count == 1)
+    {
+        printf("%d\n", min_index);
+    }
+    else
+    {
+        printf("Still Rozdil\n");
+    }
+    return 0;
+}
+// 208A
+//4032897   Jul 7, 2013 5:34:34 AM	fuwutu	 208A - Dubstep	 GNU C++0x	Accepted	15 ms	0 KB
+#include <iostream>
+#include <string>
+#include <vector>
+
+using namespace std;
+
+int main()
+{
+    string s;
+    cin >> s;
+
+    vector<string> words;
+    size_t start = 0;
+    while (true)
+    {
+        size_t end = s.find("WUB", start);
+        if (end == string::npos)
+        {
+            words.push_back(s.substr(start, end));
+            break;
+        }
+        if (end != start)
+        {
+            words.push_back(s.substr(start, end - start));
+        }
+        start = end + 3;
+    }
+
+    if (!words.empty())
+    {
+        cout << words[0];
+    }
+    for (size_t i = 1; i < words.size(); ++i)
+    {
+        cout << " " << words[i];
+    }
+    cout << endl;
+
+    return 0;
+}
+// 208D
+//4263589   Aug 11, 2013 6:26:48 AM 	fuwutu 	208D - Prizes, Prizes, more Prizes 	GNU C++0x 	Accepted 	30 ms 	0 KB
+#include <cstdio>
+
+int main()
+{
+    int n, p[50], a, b, c, d, e, points(0), mug(0), towel(0), bag(0), bicycle(0), car(0);
+    scanf("%d", &n);
+    for (int i = 0; i < n; ++i)
+    {
+        scanf("%d", &p[i]);
+    }
+    scanf("%d%d%d%d%d", &a, &b, &c, &d, &e);
+
+    for (int i = 0; i < n; ++i)
+    {
+        points += p[i];
+
+        car += points / e;
+        points %= e;
+        bicycle += points / d;
+        points %= d;
+        bag += points / c;
+        points %= c;
+        towel += points / b;
+        points %= b;
+        mug += points / a;
+        points %= a;
+    }
+    printf("%I64d %I64d %I64d %I64d %I64d\n%d\n", mug, towel, bag, bicycle, car, points);
+    return 0;
+}
+// 214A
+//4032999   Jul 7, 2013 7:05:20 AM	fuwutu	 214A - System of Equations	 GNU C++0x	Accepted	15 ms	0 KB
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    int n, m, answer(0);
+    cin >> n >> m;
+
+    for (int a = 0; a * a <= n && a <= m; ++a)
+    {
+        int b = n - a * a;
+        if (a + b * b == m)
+        {
+            answer += 1;
+        }
+    }
+
+    cout << answer << endl;
+    return 0;
+}
+// 215A
+//4034009   Jul 7, 2013 1:12:56 PM	fuwutu	 215A - Bicycle Chain	 GNU C++0x	Accepted	15 ms	0 KB
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    int n, m, a[50], b, max(0), count(1);
+    cin >> n;
+    for (int i = 0; i < n; ++i)
+    {
+        cin >> a[i];
+    }
+    cin >> m;
+    for (int i = 0; i < m; ++i)
+    {
+        cin >> b;
+        for (int j = 0; j < n; ++j)
+        {
+            if (b % a[j] == 0)
+            {
+                int x = b / a[j];
+                if (x > max)
+                {
+                    max = x;
+                    count = 1;
+                }
+                else if (x == max)
+                {
+                    count += 1;
+                }
+                break;
+            }
+        }
+    }
+    cout << count << endl;
+    return 0;
+}
+// 216A
+//4055814   Jul 12, 2013 8:45:32 PM	fuwutu	 216A - Tiling with Hexagons	 GNU C++0x	Accepted	15 ms	0 KB
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    int a, b, c;
+    cin >> a >> b >> c;
+    cout << a * b + b * c + c * a - a - b - c + 1 << endl;
+    return 0;
+}
+// 218A
+//4306429	 Aug 18, 2013 7:09:01 AM	fuwutu	 218A - Mountain Scenery	 GNU C++0x	Accepted	62 ms	0 KB
+#include <cstdio>
+
+int main()
+{
+    int n, k, r[201];
+    scanf("%d%d%d", &n, &k, &r[0]);
+    for (int i = 1; i <= n * 2; i += 2)
+    {
+        scanf("%d%d", &r[i], &r[i+1]);
+        if (k > 0 && r[i] > r[i-1] + 1 && r[i] > r[i+1] + 1)
+        {
+            k -= 1;
+            r[i] -= 1;
+        }
+    }
+    printf("%d", r[0]);
+    for (int i = 1; i <= n * 2; ++i)
+    {
+        printf(" %d", r[i]);
+    }
+    printf("\n");
+    return 0;
+}
+// 218B
+//4057689   Jul 13, 2013 7:39:37 AM	fuwutu	 218B - Airport	 GNU C++0x	Accepted	15 ms	0 KB
+#include <iostream>
+#include <algorithm>
+
+using namespace std;
+
+int main()
+{
+    int n, m, a[1000];
+    cin >> n >> m;
+    for (int i = 0; i < m; ++i)
+    {
+        cin >> a[i];
+    }
+
+    sort(a, a + m);
+    int minimum(0), num(a[0]), k(0);
+    for (int i = 0; i < n; ++i)
+    {
+        minimum += num;
+        num -= 1;
+        if (num == 0)
+        {
+            num = a[++k];
+        }
+    }
+
+    sort(a, a + m, greater<int>());
+    int maximum(0);
+    while (n--)
+    {
+        maximum += a[0];
+        a[0] -= 1;
+        for (int i = 1; i < m; ++i)
+        {
+            if (a[i] <= a[i-1])
+            {
+                break;
+            }
+            swap(a[i], a[i-1]);
+        }
+    }
+
+    cout << maximum << " " << minimum << endl;
+    return 0;
+}
+// 219A
+//4033694   Jul 7, 2013 11:59:29 AM	fuwutu	 219A - k-String	 GNU C++0x	Accepted	15 ms	0 KB
+#include <iostream>
+#include <string>
+
+using namespace std;
+
+int main()
+{
+    int k;
+    string s;
+    cin >> k >> s;
+
+    int count[26] = {0};
+    for (size_t i = 0; i < s.length(); ++i)
+    {
+        count[s[i]-'a'] += 1;
+    }
+
+    string s1;
+    size_t c = 0;
+    for (; c < 26; ++c)
+    {
+        if (count[c] % k != 0)
+        {
+            break;
+        }
+        else
+        {
+            s1.append(count[c] / k, 'a' + c);
+        }
+    }
+    if (c == 26)
+    {
+        while (k--)
+        {
+            cout << s1;
+        }
+        cout << endl;
+    }
+    else
+    {
+        cout << -1 << endl;
+    }
+
+    return 0;
+}
+// 221A
+//4033744   Jul 7, 2013 12:13:57 PM	fuwutu	 221A - Little Elephant and Function	 GNU C++0x	Accepted	15 ms	0 KB
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    int n;
+    cin >> n;
+    cout << n;
+    for (int i = 1; i < n; ++i)
+    {
+        cout << " " << i;
+    }
+    cout << endl;
+    return 0;
+}
+// 221B
+//4263403   Aug 11, 2013 5:31:52 AM 	fuwutu 	221B - Little Elephant and Numbers 	GNU C++0x 	Accepted 	30 ms 	0 KB
+#include <iostream>
+
+using namespace std;
+
+bool digit[10] = {false};
+
+void init(int n)
+{
+    while (n != 0)
+    {
+        digit[n % 10] = true;
+        n /= 10;
+    }
+}
+
+bool match(int n)
+{
+    while (n != 0)
+    {
+        if (digit[n % 10])
+        {
+            return true;
+        }
+        n /= 10;
+    }
+    return false;
+}
+
+int main()
+{
+    int x;
+    cin >> x;
+    init(x);
+
+    int d = 1, count(0);
+    while (d * d < x)
+    {
+        if (x % d == 0)
+        {
+            if (match(d))
+            {
+                ++count;
+            }
+            if (match(x / d))
+            {
+                ++count;
+            }
+        }
+        ++d;
+    }
+    if (d * d == x && match(d))
+    {
+        ++count;
+    }
+    cout << count << endl;
+    return 0;
+}
+// 222A
+//4035123   Jul 7, 2013 6:28:36 PM	fuwutu	 222A - Shooshuns and Sequence	 GNU C++0x	Accepted	31 ms	0 KB
+#include <cstdio>
+
+using namespace std;
+
+int main()
+{
+    int n, k, a, last(0), continuous(1);
+    scanf("%d%d", &n, &k);
+    for (int i = 0; i < n; ++i)
+    {
+        scanf("%d", &a);
+        if (a == last)
+        {
+            continuous += 1;
+        }
+        else
+        {
+            continuous = 1;
+        }
+        last = a;
+    }
+    printf("%d\n", continuous + k > n ? n - continuous: -1);
+    return 0;
+}
+// 222B
+//4236807   Aug 6, 2013 4:09:16 PM	fuwutu	 222B - Cosmic Tables	 GNU C++0x	Accepted	872 ms	3900 KB
+#include <cstdio>
+#include <algorithm>
+
+using namespace std;
+
+int p[1001][1001], row[1001], col[1001];
+
+int main()
+{
+    int n, m, k;
+    scanf("%d%d%d", &n, &m, &k);
+
+    for (int r = 1; r <= n; ++r)
+        row[r] = r;
+
+    for (int c = 1; c <= m; ++c)
+        col[c] = c;
+
+    for (int r = 1; r <= n; ++r)
+        for (int c = 1; c <= m; ++c)
+            scanf("%d", &p[r][c]);
+
+    while (k--)
+    {
+        char s[2];
+        int x, y;
+        scanf("%s%d%d", s, &x, &y);
+        switch (s[0])
+        {
+        case 'r':
+            swap(row[x], row[y]);
+            break;
+        case 'c':
+            swap(col[x], col[y]);
+            break;
+        case 'g':
+            printf("%d\n", p[row[x]][col[y]]);
+            break;
+        default:
+            break;
+        }
+    }
+    return 0;
+}
+// 224A
+//4033775   Jul 7, 2013 12:22:12 PM	fuwutu	 224A - Parallelepiped	 GNU C++0x	Accepted	15 ms	0 KB
+#include <iostream>
+#include <cmath>
+
+using namespace std;
+
+int main()
+{
+    int ab, bc, ca;
+    cin >> ab >> bc >> ca;
+    int a = sqrt(ab * ca / bc + 0.5);
+    int b = sqrt(bc * ab / ca + 0.5);
+    int c = sqrt(ca * bc / ab + 0.5);
+    cout << (a + b + c) * 4 << endl;
+    return 0;
+}
+// 225A
+//4042654   Jul 9, 2013 5:40:32 PM	fuwutu	 225A - Dice Tower	 GNU C++0x	Accepted	15 ms	0 KB
+#include <iostream>
+
+using namespace std;
+
+int main()
+{
+    bool possible(true);
+    int n, x, a, b;
+    cin >> n >> x;
+    while (n--)
+    {
+        cin >> a >> b;
+        if (x == a || x == b || x == 7 - a || x == 7 - b)
+        {
+            possible = false;
+        }
+        x = 7 - x;
+    }
+    cout << (possible ? "YES" : "NO") << endl;
+    return 0;
+}
+// 227B
+//4263447   Aug 11, 2013 5:48:07 AM 	fuwutu 	227B - Effective Approach 	GNU C++0x 	Accepted 	92 ms 	400 KB
+#include <cstdio>
+
+int main()
+{
+    int n, a, index[100001];
+    scanf("%d", &n);
+    for (int i = 1; i <= n; ++i)
+    {
+        scanf("%d", &a);
+        index[a] = i;
+    }
+
+    int m, b;
+    scanf("%d", &m);
+    long long Vasya(0), Petya(0);
+    while (m--)
+    {
+        scanf("%d", &b);
+        Vasya += index[b];
+        Petya += (n + 1 - index[b]);
+    }
+    printf("%I64d %I64d\n", Vasya, Petya);
+    return 0;
+}
+// 228A
+//4021166   Jul 4, 2013 7:14:46 PM	fuwutu	 228A - Is your horseshoe on the other hoof?	 GNU C++0x	Accepted	 15 ms	 0 KB
+#include <iostream>
+#include <vector>
+#include <algorithm>
+
+using namespace std;
+
+int main()
+{
+    vector<int> s(4);
+    cin >> s[0] >> s[1] >> s[2] >> s[3];
+    sort(s.begin(), s.end());
+    s.erase(unique(s.begin(), s.end()), s.end());
+    cout << 4 - s.size() << endl;
+    return 0;
+}
+// 230A
+//4032937   Jul 7, 2013 6:12:45 AM	fuwutu	 230A - Dragons	 GNU C++0x	Accepted	15 ms	100 KB
+#include <iostream>
+#include <algorithm>
+
+using namespace std;
+
+struct dragon
+{
+    int x;
+    int y;
+};
+
+bool cmp(const dragon& left, const dragon& right)
+{
+    return left.x < right.x;
+}
+
+int main()
+{
+    int s, n;
+    cin >> s >> n;
+
+    dragon d[10000];
+    for (int i = 0; i < n; ++i)
+    {
+        cin >> d[i].x >> d[i].y;
+    }
+    sort(d, d + n, cmp);
+
+    int boss = d[n-1].x;
+    for (int i = 0; i < n && s <= boss; ++i)
+    {
+        if (s > d[i].x)
+        {
+            s += d[i].y;
+        }
+        else
+        {
+            break;
+        }
+    }
+
+    if (s > boss)
+    {
+        cout << "YES" << endl;
+    }
+    else
+    {
+        cout << "NO" << endl;
+    }
+
+    return 0;
+}
+// 230B
+//4048435   Jul 11, 2013 3:30:44 AM	fuwutu	 230B - T-primes	 GNU C++0x	Accepted	78 ms	3100 KB
+#include <cstdio>
+#include <algorithm>
+
+using namespace std;
+
+int main()
+{
+    bool notprime[1000000] = {false};
+    for (int i = 3; i < 1000; i += 2)
+    {
+        if (!notprime[i])
+        {
+            int ii = i + i;
+            for (int j = i + ii; j < 1000000; j += ii)
+            {
+                notprime[j] = true;
+            }
+        }
+    }
+    vector<long long> t_primes;
+    t_primes.push_back(2*2);
+    for (int i = 3; i < 1000000; i += 2)
+    {
+        if (!notprime[i])
+        {
+            t_primes.push_back(static_cast<long long>(i) * static_cast<long long>(i));
+        }
+    }
+    int n;
+    scanf("%d", &n);
+    while (n--)
+    {
+        long long x;
+        scanf("%I64d", &x);
+        printf("%s\n", binary_search(t_primes.begin(), t_primes.end(), x) ? "YES" : "NO");
+    }
+
+    return 0;
+}
